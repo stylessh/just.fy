@@ -5,10 +5,14 @@ $black: #191919;
   .container {
     height: 100px;
     z-index: 100;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 20px;
 
     .logo a {
       font-weight: 700;
@@ -60,29 +64,30 @@ $black: #191919;
       .menu-city-background {
         top: 0;
         left: 0;
-        right: 0;
         bottom: 0;
         position: absolute;
-        background-size: cover;
-        background-repeat: no-repeat;
-        // animation: cameraPan 30s infinite;
 
-        width: 100%;
+        width: 60%;
         height: 100%;
       }
 
-      .container {
-        position: relative;
+      .menu-container {
         height: 100%;
 
         .menu-links {
           height: 100%;
-          width: 90%;
           margin: auto;
+          width: 90%;
           display: grid;
           grid-template-columns: 70% 1fr;
           grid-template-rows: 85% 1fr;
           align-items: center;
+
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
 
           nav {
             ul {
@@ -101,7 +106,7 @@ $black: #191919;
                 text-decoration: none;
                 font-weight: 700;
 
-                transition: 0.3s ease-in-out;
+                transition: all 0.3s ease-in-out;
 
                 &:hover {
                   color: $black;
@@ -148,20 +153,103 @@ $black: #191919;
   }
 }
 
-@keyframes cameraPan {
-  0% {
-    background-position: 0 0;
+// responsive design
+
+@media screen and (max-width: 1024px) {
+  .header {
+    .hamburguer-menu {
+      .menu-layer {
+        .menu-container {
+          .menu-links {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+            text-align: center;
+            padding: 20px 50px;
+
+            width: auto;
+
+            nav {
+              ul {
+                li {
+                  font-size: 4em;
+                }
+              }
+            }
+
+            .locations {
+              display: none;
+            }
+          }
+        }
+      }
+    }
   }
-  25% {
-    background-position: 40% 10%;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    .hamburguer-menu {
+      .menu-layer {
+        .menu-container {
+          .menu-links {
+            height: 80%;
+
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px 50px;
+
+            nav {
+              ul {
+                li {
+                  font-size: 3em;
+                }
+              }
+            }
+
+            .locations {
+              display: none;
+            }
+          }
+        }
+      }
+    }
   }
-  50% {
-    background-position: 0% 10%;
-  }
-  75% {
-    background-position: 10% 40%;
-  }
-  100% {
-    background-position: 0% 00%;
+}
+
+@media screen and (max-width: 560px) {
+  .header {
+    .hamburguer-menu {
+      .menu-layer {
+        .menu-container {
+          .menu-links {
+            height: 80%;
+
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px 50px;
+
+            nav {
+              ul {
+                li {
+                  font-size: 2em;
+                }
+              }
+            }
+
+            .locations {
+              display: none;
+            }
+          }
+        }
+      }
+    }
   }
 }

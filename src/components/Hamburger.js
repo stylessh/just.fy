@@ -1,19 +1,28 @@
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import gsap from "gsap";
 
-import dallas from "../images/dallas.jpg";
-import austin from "../images/austin.jpg";
-import newyork from "../images/newyork.jpg";
+import paris from "../images/paris.jpg";
+import losangeles from "../images/losangeles.jpg";
+import london from "../images/london.jpg";
 import sanfrancisco from "../images/sanfrancisco.jpg";
-import beijing from "../images/beijing.jpg";
+import dubai from "../images/dubai.jpg";
+
+import {
+  closeMenu,
+  staggerText,
+  staggerReveal,
+  handleCity,
+  handleCityReturn,
+  fadeInUp,
+  openMenu,
+} from "../animations/index";
 
 const cities = [
-  { name: "Dallas", image: dallas },
-  { name: "Austin", image: austin },
-  { name: "New York", image: newyork },
+  { name: "Paris", image: paris },
+  { name: "Los Angeles", image: losangeles },
+  { name: "London", image: london },
   { name: "San Francisco", image: sanfrancisco },
-  { name: "Beijing", image: beijing },
+  { name: "Dubai", image: dubai },
 ];
 
 const Hamburger = ({ state }) => {
@@ -31,38 +40,14 @@ const Hamburger = ({ state }) => {
     if (state.clicked === false) {
       // close menu
 
-      gsap.to([revealMenu, revealMenuBackground], {
-        duration: 0.8,
-        height: 0,
-        transformOrigin: "right",
-        skewY: 2,
-        ease: "power3.inOut",
-        stagger: {
-          amount: 0.1,
-        },
-      });
-
-      gsap.to(menu, {
-        duration: 1,
-        css: { display: "none" },
-      });
+      closeMenu(revealMenu, revealMenuBackground, menu);
     } else if (
       state.clicked === true ||
       (state.clicked === true && state.initial === null)
     ) {
       // open menu
 
-      gsap.to(menu, {
-        duration: 0,
-        css: { display: "block" },
-      });
-
-      gsap.to([revealMenuBackground, revealMenu], {
-        duration: 0,
-        opacity: 1,
-        skewY: 0,
-        height: "100%",
-      });
+      openMenu(menu, revealMenuBackground, revealMenu);
 
       staggerReveal(revealMenuBackground, revealMenu);
 
@@ -70,66 +55,6 @@ const Hamburger = ({ state }) => {
       staggerText(line1, line2, line3);
     }
   }, [state]);
-
-  const staggerReveal = (node1, node2) => {
-    gsap.from([node1, node2], {
-      duration: 0.8,
-      height: 0,
-      transformOrigin: "right",
-      skewY: 2,
-      ease: "power2.inOut",
-      stagger: {
-        amount: 0.1,
-      },
-    });
-  };
-
-  const fadeInUp = (node) => {
-    gsap.from(node, {
-      y: 60,
-      duration: 0.5,
-      delay: 0.5,
-      opacity: 0,
-      ease: "powe3.inOut",
-    });
-  };
-
-  const staggerText = (node1, node2, node3) => {
-    gsap.from([node1, node2, node3], {
-      duration: 0.8,
-      opacity: 0,
-      delay: 0.6,
-      ease: "power3.inOut",
-      stagger: {
-        amount: 0.3,
-      },
-    });
-  };
-
-  const handleCity = (city) => {
-    gsap.to(cityBackground, {
-      duration: 0,
-      background: `url(${city}) center center`,
-      backgroundSize: 'cover'
-    });
-    gsap.to(cityBackground, {
-      duration: 0.4,
-      opacity: 1,
-      ease: "power3.inOut",
-    });
-    gsap.from(cityBackground, {
-      duration: 0.4,
-      skewY: 2,
-      transformOrigin: "right top",
-    });
-  };
-
-  const handleCityReturn = () => {
-    gsap.to(cityBackground, {
-      duration: 0.4,
-      opacity: 0,
-    });
-  };
 
   return (
     <div className="hamburguer-menu" ref={(el) => (menu = el)}>
@@ -143,7 +68,7 @@ const Hamburger = ({ state }) => {
           ref={(el) => (cityBackground = el)}
         ></div>
 
-        <div className="container">
+        <div className="menu-container">
           <div className="menu-links">
             <nav>
               <ul>
@@ -182,8 +107,8 @@ const Hamburger = ({ state }) => {
               {cities.map((city) => (
                 <span
                   key={city.name}
-                  onMouseEnter={() => handleCity(city.image)}
-                  onMouseOut={handleCityReturn}
+                  onMouseEnter={() => handleCity(city.image, cityBackground)}
+                  onMouseOut={() => handleCityReturn(cityBackground)}
                 >
                   {city.name}
                 </span>

@@ -8,17 +8,14 @@ function App() {
     <Router>
       <div className="App">
         <Header />
-        <div className="container">
-          <div className="wrapper">
-            <div className="home">
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/opportunities" component={Opportunities} />
-                <Route exact path="/solutions" component={Solutions} />
-                <Route exact path="/contact-us" component={Contact} />
-              </Switch>
-            </div>
-          </div>
+
+        <div className="home">
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/opportunities" component={Opportunities} />
+            <Route exact path="/solutions" component={Solutions} />
+            <Route exact path="/contact-us" component={Contact} />
+          </Switch>
         </div>
       </div>
     </Router>
@@ -39,15 +36,44 @@ function Contact() {
 
 function Home() {
   return (
-    <div className="container">
-      <div className="wrapper">
-        <h5>
-          The <b>HAMBRG</b>, is a creative, engineer driven, global agency
-          working on advancing the software, advertising and design communities
-          to new heights.
-        </h5>
-      </div>
-    </div>
+    <>
+      <h5>
+        The <b>HAMBRG</b>, is a creative, engineer driven, global agency working
+        on advancing the software, advertising and design communities to new
+        heights.
+      </h5>
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+    </>
   );
 }
 export default App;
